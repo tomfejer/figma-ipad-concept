@@ -71,8 +71,15 @@ export default class App extends React.Component<{}, State> {
           }}
         >
           <div className="SelectionDimensions">
-            {parseInt(this.state.width)} × {parseInt(this.state.height)}
+            <div className="DimensionWrapper">
+              {parseInt(this.state.width)}{" "}
+            </div>
+            <span className="DimensionDivider"> × </span>
+            <div className="DimensionWrapper">
+              {parseInt(this.state.height)}{" "}
+            </div>
           </div>
+          <div className="FrameLabel">Frame</div>
         </Rnd>
       </div>
     );

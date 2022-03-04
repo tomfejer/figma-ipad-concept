@@ -34,7 +34,7 @@ body {
 
 .SelectionDimensions {
   position: absolute;
-  bottom: -40px;
+  bottom: -56px;
   color: white;
   background: #18a0fb;
 
@@ -70,4 +70,26 @@ body {
   height: 24px;
   background: white;
   border: 1px solid #18a0fb;
+}
+
+.DimensionDivider {
+  color: white;
+  opacity: 0.5;
+  margin: 0 10px;
+}
+
+.DimensionWrapper {
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.FrameLabel {
+  position: absolute;
+  left: 0;
+  top: -26px;
+  font-size: 15px;
+  line-height: 145%;
+  color: #18a0fb;
 }
