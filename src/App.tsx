@@ -2,6 +2,7 @@ import * as React from "react";
 import { render } from "react-dom";
 import { Rnd } from "react-rnd";
 import "./styles.css";
+import FakeToolbar from "./FakeToolbar";
 
 const style = {} as const;
 
@@ -10,6 +11,10 @@ type State = {
   y: number;
   width: number | string;
   height: number | string;
+  disabledDrag: boolean;
+  value: any;
+  selectionActive: boolean;
+  dimensionInputActive: boolean;
 };
 
 // const CustomHandle = (props) => <div className={"CustomHandle"} {...props} />;
@@ -32,24 +37,104 @@ export default class App extends React.Component<{}, State> {
       width: 200,
       height: 200,
       x: 100,
-      y: 100
+      y: 100,
+      disabledDrag: true,
+      value: "",
+      selectionActive: true,
+      dimensionInputActive: true
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDeselection = this.handleDeselection.bind(this);
+    this.handleSelection = this.handleSelection.bind(this);
+    this.handleDimensionInputToggle = this.handleDimensionInputToggle.bind(
+      this
+    );
+  }
+
+  handleChange(event) {
+    this.setState({
+      value: event.target.value
+    });
+
+    console.log("change");
+    event.preventDefault();
+  }
+
+  handleSubmit(event) {
+    this.setState({
+      width: this.state.value,
+      value: ""
+    });
+    console.log("submit");
+    event.preventDefault();
+  }
+
+  handleDeselection(event) {
+    this.setState({
+      selectionActive: false,
+      disabledDrag: true,
+      dimensionInputActive: false
+    });
+    event.preventDefault();
+  }
+
+  handleSelection(event) {
+    this.setState({
+      selectionActive: true,
+      disabledDrag: false
+    });
+    // console.log("Selection");
+    event.preventDefault();
+  }
+
+  handleDimensionInputToggle() {
+    this.setState({
+      dimensionInputActive: !this.state.dimensionInputActive
+    });
   }
 
   render() {
     return (
       <div className="MyCanvas">
+        <div className="DeselectionArea" onClick={this.handleDeselection} />
         <Rnd
+          data-selected={this.state.selectionActive}
           style={style}
           resizeHandleComponent={{
-            bottomRight: <CustomHandleCorner />,
-            bottomLeft: <CustomHandleCorner />,
-            topRight: <CustomHandleCorner />,
-            topLeft: <CustomHandleCorner />,
-            top: <CustomHandleVertical />,
-            bottom: <CustomHandleVertical />,
-            left: <CustomHandleHorizontal />,
-            right: <CustomHandleHorizontal />
+            bottomRight: (
+              <CustomHandleCorner data-selected={this.state.selectionActive} />
+            ),
+            bottomLeft: (
+              <CustomHandleCorner data-selected={this.state.selectionActive} />
+            ),
+            topRight: (
+              <CustomHandleCorner data-selected={this.state.selectionActive} />
+            ),
+            topLeft: (
+              <CustomHandleCorner data-selected={this.state.selectionActive} />
+            ),
+            top: (
+              <CustomHandleVertical
+                data-selected={this.state.selectionActive}
+              />
+            ),
+            bottom: (
+              <CustomHandleVertical
+                data-selected={this.state.selectionActive}
+              />
+            ),
+            left: (
+              <CustomHandleHorizontal
+                data-selected={this.state.selectionActive}
+              />
+            ),
+            right: (
+              <CustomHandleHorizontal
+                data-selected={this.state.selectionActive}
+              />
+            )
           }}
           size={{
             width: this.state.width,
@@ -69,18 +154,103 @@ export default class App extends React.Component<{}, State> {
               ...position
             });
           }}
+          disableDragging={this.state.disabledDrag}
+          onClick={this.handleSelection}
+          enableUserSelectHack={true}
         >
-          <div className="SelectionDimensions">
-            <div className="DimensionWrapper">
-              {parseInt(this.state.width)}{" "}
+          <div
+            className="SelectionDimensions"
+            data-selected={this.state.selectionActive}
+          >
+            <div
+              className="DimensionWrapper"
+              data-selected={this.state.dimensionInputActive}
+              onClick={this.handleDimensionInputToggle}
+            >
+              {parseInt(this.state.width)}
+              {/* {this.state.width} */}
             </div>
             <span className="DimensionDivider"> × </span>
             <div className="DimensionWrapper">
-              {parseInt(this.state.height)}{" "}
+              {parseInt(this.state.height)}
+            </div>
+            <div
+              className="DimensionInputWrapper"
+              data-dimension-input-active={this.state.dimensionInputActive}
+            >
+              <span className="RecentLabel">Recents</span>
+              <div className="RecentsWrapper">
+                <div
+                  className="RecentItem"
+                  onClick={() => {
+                    this.setState({
+                      width: 320
+                    });
+                  }}
+                >
+                  320
+                </div>
+                <div
+                  className="RecentItem"
+                  onClick={() => {
+                    this.setState({
+                      width: 1024
+                    });
+                  }}
+                >
+                  1024
+                </div>
+                <div
+                  className="RecentItem"
+                  onClick={() => {
+                    this.setState({
+                      width: 40
+                    });
+                  }}
+                >
+                  40
+                </div>
+                <div
+                  className="RecentItem"
+                  onClick={() => {
+                    this.setState({
+                      width: 24
+                    });
+                  }}
+                >
+                  24
+                </div>
+              </div>
+              <span className="RecentLabel">Width</span>
+              <form onSubmit={this.handleSubmit}>
+                <input
+                  type="text"
+                  name="name"
+                  className="InputField"
+                  autoComplete="off"
+                  placeholder="Write here"
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                />
+                <input
+                  className="InputSubmitButton"
+                  type="submit"
+                  value="✓"
+                  onClick={this.handleSubmit}
+                  data-value={this.state.value}
+                />
+              </form>
             </div>
           </div>
-          <div className="FrameLabel">Frame</div>
+
+          <div
+            className="FrameLabel"
+            data-selected={this.state.selectionActive}
+          >
+            Frame
+          </div>
         </Rnd>
+        <FakeToolbar className="FakeToolbar" />
       </div>
     );
   }
