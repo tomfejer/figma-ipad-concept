@@ -1,8 +1,10 @@
 import * as React from "react";
+
 import { render } from "react-dom";
 import { Rnd } from "react-rnd";
 import "./styles.css";
 import FakeToolbar from "./FakeToolbar";
+// import { motion } from "framer-motion";
 
 const style = {} as const;
 
