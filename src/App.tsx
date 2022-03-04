@@ -102,6 +102,7 @@ export default class App extends React.Component<{}, State> {
         <Rnd
           data-selected={this.state.selectionActive}
           style={style}
+          dragHandleClassName="handle"
           resizeHandleComponent={{
             bottomRight: (
               <CustomHandleCorner data-selected={this.state.selectionActive} />
@@ -156,8 +157,9 @@ export default class App extends React.Component<{}, State> {
           }}
           disableDragging={this.state.disabledDrag}
           onClick={this.handleSelection}
-          enableUserSelectHack={true}
+          // enableUserSelectHack={true}
         >
+          <div className="handleArea handle" />
           <div
             className="SelectionDimensions"
             data-selected={this.state.selectionActive}
@@ -244,7 +246,7 @@ export default class App extends React.Component<{}, State> {
           </div>
 
           <div
-            className="FrameLabel"
+            className="FrameLabel handle"
             data-selected={this.state.selectionActive}
           >
             Frame
