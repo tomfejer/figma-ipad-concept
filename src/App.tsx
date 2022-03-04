@@ -12,8 +12,18 @@ type State = {
   height: number | string;
 };
 
-const CustomHandle = (props) => <div className={"CustomHandle"} {...props} />;
-const CustomHandleCorner = () => <CustomHandle></CustomHandle>;
+// const CustomHandle = (props) => <div className={"CustomHandle"} {...props} />;
+const CustomHandleCorner = (props) => (
+  <div className={"CustomHandle"} {...props} />
+);
+
+const CustomHandleVertical = (props) => (
+  <div className={"CustomHandleVertical"} {...props} />
+);
+
+const CustomHandleHorizontal = (props) => (
+  <div className={"CustomHandleHorizontal"} {...props} />
+);
 
 export default class App extends React.Component<{}, State> {
   constructor(props) {
@@ -31,7 +41,16 @@ export default class App extends React.Component<{}, State> {
       <div className="MyCanvas">
         <Rnd
           style={style}
-          resizeHandleComponent={{ bottomRight: <CustomHandleCorner /> }}
+          resizeHandleComponent={{
+            bottomRight: <CustomHandleCorner />,
+            bottomLeft: <CustomHandleCorner />,
+            topRight: <CustomHandleCorner />,
+            topLeft: <CustomHandleCorner />,
+            top: <CustomHandleVertical />,
+            bottom: <CustomHandleVertical />,
+            left: <CustomHandleHorizontal />,
+            right: <CustomHandleHorizontal />
+          }}
           size={{
             width: this.state.width,
             height: this.state.height

@@ -29,6 +29,7 @@ body {
   inset: 0;
   background: #e5e5e5;
   overflow: hidden;
+  /* transform: rotate(45deg); */
 }
 
 .SelectionDimensions {
@@ -51,4 +52,22 @@ body {
   background: white;
   border: 1px solid #18a0fb;
   margin: 4px;
+}
+
+.CustomHandleVertical {
+  position: absolute;
+  left: calc(50% - (24px / 2));
+  width: 24px;
+  height: 10px;
+  background: white;
+  border: 1px solid #18a0fb;
+}
+
+.CustomHandleHorizontal {
+  position: absolute;
+  top: calc(50% - (24px / 2));
+  width: 10px;
+  height: 24px;
+  background: white;
+  border: 1px solid #18a0fb;
 }
