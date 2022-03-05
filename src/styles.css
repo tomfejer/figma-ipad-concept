@@ -277,3 +277,17 @@ body {
   position: absolute;
   left: calc(50vw - (207px / 2));
 }
+
+.FakeLayersPanel {
+  position: absolute;
+  left: 24px;
+  top: 98px;
+  border-radius: 13px;
+}
+
+.FakeDesignPanel {
+  position: absolute;
+  left: 24px;
+  top: 216px;
+  border-radius: 13px;
+}

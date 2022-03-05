@@ -7,6 +7,8 @@ import FakeToolbar from "./FakeToolbar";
 import FakeHeaderLeft from "./FakeHeaderLeft";
 import FakeHeaderCenter from "./FakeHeaderCenter";
 import FakeHeaderRight from "./FakeHeaderRight";
+import FakeLayersPanel from "./FakeLayersPanel";
+import FakeDesignPanel from "./FakeDesignPanel";
 
 import { motion } from "framer-motion";
 // import { motion } from "framer-motion";
@@ -43,12 +45,12 @@ export default class App extends React.Component<{}, State> {
     this.state = {
       width: 200,
       height: 200,
-      x: 100,
-      y: 100,
+      x: 400,
+      y: 400,
       disabledDrag: true,
       value: "",
-      selectionActive: true,
-      dimensionInputActive: true
+      selectionActive: false,
+      dimensionInputActive: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -268,14 +270,8 @@ export default class App extends React.Component<{}, State> {
           drag
           dragTransition={{
             power: 0
-            // min: 0,
-            // max: 200,
-            // timeConstant: 250,
-            // bounceStiffness: 400
-            // modifyTarget: 100
           }}
           dragElastic={1}
-          // whileDrag={{ scale: 1.}}
           dragConstraints={{ left: 0, right: 0, top: "50vh", bottom: "50vh" }}
         >
           <FakeToolbar className="FakeToolbar" />
@@ -285,6 +281,26 @@ export default class App extends React.Component<{}, State> {
           <FakeHeaderCenter className="FakeHeaderCenter" />
           <FakeHeaderRight className="FakeHeaderRight" />
         </div>
+        <motion.div
+          drag
+          dragTransition={{
+            power: 0
+          }}
+          dragElastic={1}
+          dragConstraints={{ left: 0, right: 0, top: "50vh", bottom: "50vh" }}
+        >
+          <FakeLayersPanel className="FakeLayersPanel" />
+        </motion.div>
+        <motion.div
+          drag
+          dragTransition={{
+            power: 0
+          }}
+          dragElastic={1}
+          dragConstraints={{ left: 0, right: 0, top: "50vh", bottom: "50vh" }}
+        >
+          <FakeDesignPanel className="FakeDesignPanel" />
+        </motion.div>
       </div>
     );
   }
