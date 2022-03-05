@@ -45,8 +45,8 @@ export default class App extends React.Component<{}, State> {
     this.state = {
       width: 200,
       height: 200,
-      x: 400,
-      y: 400,
+      x: 450,
+      y: 300,
       disabledDrag: true,
       value: "",
       selectionActive: false,
