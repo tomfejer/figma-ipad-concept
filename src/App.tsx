@@ -4,6 +4,11 @@ import { render } from "react-dom";
 import { Rnd } from "react-rnd";
 import "./styles.css";
 import FakeToolbar from "./FakeToolbar";
+import FakeHeaderLeft from "./FakeHeaderLeft";
+import FakeHeaderCenter from "./FakeHeaderCenter";
+import FakeHeaderRight from "./FakeHeaderRight";
+
+import { motion } from "framer-motion";
 // import { motion } from "framer-motion";
 
 const style = {} as const;
@@ -67,7 +72,8 @@ export default class App extends React.Component<{}, State> {
   handleSubmit(event) {
     this.setState({
       width: this.state.value,
-      value: ""
+      value: "",
+      dimensionInputActive: false
     });
     console.log("submit");
     event.preventDefault();
@@ -188,7 +194,8 @@ export default class App extends React.Component<{}, State> {
                   className="RecentItem"
                   onClick={() => {
                     this.setState({
-                      width: 320
+                      width: 320,
+                      dimensionInputActive: false
                     });
                   }}
                 >
@@ -198,7 +205,8 @@ export default class App extends React.Component<{}, State> {
                   className="RecentItem"
                   onClick={() => {
                     this.setState({
-                      width: 1024
+                      width: 1024,
+                      dimensionInputActive: false
                     });
                   }}
                 >
@@ -208,7 +216,8 @@ export default class App extends React.Component<{}, State> {
                   className="RecentItem"
                   onClick={() => {
                     this.setState({
-                      width: 40
+                      width: 40,
+                      dimensionInputActive: false
                     });
                   }}
                 >
@@ -218,7 +227,8 @@ export default class App extends React.Component<{}, State> {
                   className="RecentItem"
                   onClick={() => {
                     this.setState({
-                      width: 24
+                      width: 24,
+                      dimensionInputActive: false
                     });
                   }}
                 >
@@ -254,7 +264,27 @@ export default class App extends React.Component<{}, State> {
             Frame
           </div>
         </Rnd>
-        <FakeToolbar className="FakeToolbar" />
+        <motion.div
+          drag
+          dragTransition={{
+            power: 0
+            // min: 0,
+            // max: 200,
+            // timeConstant: 250,
+            // bounceStiffness: 400
+            // modifyTarget: 100
+          }}
+          dragElastic={1}
+          // whileDrag={{ scale: 1.}}
+          dragConstraints={{ left: 0, right: 0, top: "50vh", bottom: "50vh" }}
+        >
+          <FakeToolbar className="FakeToolbar" />
+        </motion.div>
+        <div className="FakeHeader">
+          <FakeHeaderLeft className="FakeHeaderLeft" />
+          <FakeHeaderCenter className="FakeHeaderCenter" />
+          <FakeHeaderRight className="FakeHeaderRight" />
+        </div>
       </div>
     );
   }
