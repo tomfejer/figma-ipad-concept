@@ -1,4 +1,6 @@
-Work in progress
+#Figma for iPad concept
+![Figma for iPad concept!](./thumbnail.png "Figma for iPad concept")
 
-Figma for iPad concept
-Exploring touch and pencil input interactions
+Quick fun prototype to explore touch and pencil interactions on the iPad
+
+---

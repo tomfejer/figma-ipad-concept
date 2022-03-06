@@ -17,7 +17,7 @@ body {
   cursor: default;
   user-select: none;
   /* height: 100%; */
-
+  background: black;
   overflow: hidden;
 }
 
